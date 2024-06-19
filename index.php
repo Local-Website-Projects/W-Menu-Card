@@ -147,7 +147,7 @@ $_GET['restaurant_id'] = 2;
                         ?>
                         <div class="col-xl-4 col-lg-6 col-md-6">
                             <div class="menu-head">
-                                <h4 class="title text-primary"><?php echo $fetch_category[$i]['category_name']; ?></h4>
+                                <h4 class="title text-primary"><?php echo ucwords(strtolower($fetch_category[$i]['category_name'])); ?></h4>
                             </div>
                             <?php
                             $fetch_items = $db_handle->runQuery("select * from items where cat_id = {$fetch_category[$i]['cat_id']} and status = 1");
@@ -157,10 +157,10 @@ $_GET['restaurant_id'] = 2;
                                 <div class="dz-shop-card style-2 m-b30 p-0 shadow-none">
                                     <div class="dz-content">
                                         <div class="dz-head">
-                                            <span class="header-text"><a
-                                                        href="#"><?php echo $fetch_items[$j]['item_name']; ?></a></span>
+                                            <p class="header-text"><a
+                                                        href="#"><?php echo $fetch_items[$j]['item_name']; ?></a></p>
                                             <span class="img-line"></span>
-                                            <span class="header-price"><?php echo $fetch_items[$j]['item_price']; ?></span>
+                                            <p class="header-price"><?php echo $fetch_items[$j]['item_price']; ?></p>
                                         </div>
                                         <p class="dz-body" style="text-align: justify">
                                             <?php echo $fetch_items[$j]['short_desc']; ?>
@@ -184,7 +184,7 @@ $_GET['restaurant_id'] = 2;
                             ?>
                             <div class="col-xl-4 col-lg-6 col-md-6">
                                 <div class="menu-head">
-                                    <h4 class="title text-primary"><?php echo $fetch_category_new[$i]['category_name']; ?></h4>
+                                    <h4 class="title text-primary"><?php echo ucwords(strtolower($fetch_category_new[$i]['category_name'])); ?></h4>
                                 </div>
                                 <?php
                                 $fetch_items_new = $db_handle->runQuery("select * from items where cat_id = {$fetch_category_new[$i]['cat_id']} and status = 1");
@@ -194,8 +194,7 @@ $_GET['restaurant_id'] = 2;
                                     <div class="dz-shop-card style-2 m-b30 p-0 shadow-none">
                                         <div class="dz-content">
                                             <div class="dz-head">
-                                                <span class="header-text"><a
-                                                            href="#"><?php echo $fetch_items_new[$j]['item_name']; ?></a></span>
+                                                <span class="header-text"><a href="#"><?php echo $fetch_items_new[$j]['item_name']; ?></a></span>
                                                 <span class="img-line"></span>
                                                 <span class="header-price"><?php echo $fetch_items_new[$j]['item_price']; ?></span>
                                             </div>
@@ -212,6 +211,15 @@ $_GET['restaurant_id'] = 2;
                         }
                     }
                     ?>
+
+                </div>
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <?php
+                        $fetch_note = $db_handle->runQuery("select note from users where user_id = {$_GET['restaurant_id']}");
+                        ?>
+                        <p><?php echo $fetch_note[0]['note'];?></p>
+                    </div>
                 </div>
             </div>
             <img class="bg1 dz-move-down" src="assets/images/background/pic12.png" alt="/">
@@ -250,7 +258,7 @@ $_GET['restaurant_id'] = 2;
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
                         <div class="widget widget_getintuch">
-                            <h5 class="footer-title">Contact Number</h5>
+                            <h5 class="footer-title">Call Us</h5>
                             <ul>
                                 <li>
                                     <i class="flaticon-phone-call"></i>
@@ -262,7 +270,7 @@ $_GET['restaurant_id'] = 2;
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6	">
                         <div class="widget widget_getintuch">
-                            <h5 class="footer-title">Social Media</h5>
+                            <h5 class="footer-title">Visit Us</h5>
                             <div class="dz-social-icon">
                                 <ul>
                                     <li><a target="_blank" class="fab fa-facebook-f"

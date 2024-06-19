@@ -2264,7 +2264,7 @@ textarea.form-control-lg {
     .form-floating > .form-control-plaintext:-webkit-autofill {
       padding-top: 1.625rem;
       padding-bottom: 0.625rem; }
-  
+
   .form-floating > .form-select,
   .form-floating > select {
     padding-top: 1.625rem;
@@ -3292,7 +3292,7 @@ textarea.form-control-lg {
   flex-direction: column;
   align-items: flex-start;
   justify-content: center; }
-  
+
   .btn-group-vertical > .btn,
   .btn-group-vertical > .wp-block-button__link,
   .btn-group-vertical > .btn-group {
@@ -9502,7 +9502,7 @@ strong,
   padding-left: 30px;
   padding-right: 30px; }
   @media only screen and (max-width: 1280px) {
-    
+
     .container-fluid,
     .container-sm,
     .container-md,
@@ -9511,7 +9511,7 @@ strong,
       padding-left: 20px;
       padding-right: 20px; } }
   @media only screen and (max-width: 575px) {
-    
+
     .container-fluid,
     .container-sm,
     .container-md,
@@ -20716,7 +20716,7 @@ ul a.rsswidget {
     -webkit-transition: all 0.5s;
     -ms-transition: all 0.5s;
     transition: all 0.5s; }
-  
+
   .dz-box-bg .icon-box-btn .btn,
   .dz-box-bg .icon-box-btn .wp-block-button__link {
     background-color: #eeeeee;
@@ -24391,7 +24391,7 @@ pre {
         line-height: 28px; }
         .dz-shop-card.style-2 .dz-content .dz-head .header-text a {
           color: var(--title);
-          max-width: 250px;
+          max-width: 300px;
           text-overflow: ellipsis;
           overflow: hidden;
           white-space: nowrap;
