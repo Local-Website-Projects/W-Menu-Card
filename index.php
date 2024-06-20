@@ -37,7 +37,7 @@
         <div class="top-bar">
             <div class="logo">
                 <a href="#">
-                    <img alt="logo" src="assets_home/img/logo.png">
+                    <img alt="logo" style="max-width: 180px" src="assets_home/img/logo.png">
                 </a>
             </div>
             <div class="login">
@@ -56,10 +56,10 @@
                 <div class="hero-text">
                     <h1>Easy Ways to Promote Your Services</h1>
                 </div>
-                <div class="subscribe-text">
+                <div class="subscribe-text mt-5">
                     <p>Subscribe email</p>
                     <form class="get-subscribee" id="subscribe-form" method="post" action="Restaurant">
-                        <input type="text" id="email-input" name="restaurant_name" placeholder="Enter Restaurant Name" required="" list="suggestions">
+                        <input type="text" id="email-input" name="restaurant_name" placeholder="Enter Restaurant Name" required="" list="suggestions" autocomplete="off">
                         <datalist id="suggestions">
                             <!-- Options will be dynamically populated here -->
                         </datalist>
