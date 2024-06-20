@@ -58,12 +58,12 @@
                 </div>
                 <div class="subscribe-text">
                     <p>Subscribe email</p>
-                    <form role="form" class="get-subscribee" id="subscribe-form" method="post">
-                        <input type="email" id="email-input" name="Email_Address" placeholder="Enter your email here" required="" list="suggestions">
+                    <form class="get-subscribee" id="subscribe-form" method="post" action="Restaurant">
+                        <input type="text" id="email-input" name="restaurant_name" placeholder="Enter Restaurant Name" required="" list="suggestions">
                         <datalist id="suggestions">
                             <!-- Options will be dynamically populated here -->
                         </datalist>
-                        <button type="submit" class="btn">Subscribe Now</button>
+                        <button type="submit" name="search_restaurant" class="btn">Find Now</button>
                     </form>
                 </div>
 

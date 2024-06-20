@@ -4,7 +4,25 @@ require_once('config/dbConfig.php');
 $db_handle = new DBController();
 date_default_timezone_set("Asia/Dhaka");
 $updated_at = date("Y-m-d H:i:s");
-$_GET['restaurant_id'] = 2;
+
+if (isset($_POST['search_restaurant'])) {
+    $restaurant_name = $db_handle->checkValue($_POST['restaurant_name']);
+    $fetch_restaurant = $db_handle->runQuery("SELECT * FROM users WHERE restaurant_name = '$restaurant_name'");
+    $restaurant_id = $fetch_restaurant[0]['user_id'];
+    // Output the JavaScript code to update the URL and load content dynamically
+    echo "<script>
+            var newUrl = window.location.protocol + '//' + window.location.host + window.location.pathname + '?' + encodeURIComponent('$restaurant_name');
+            window.history.replaceState({path: newUrl}, '', newUrl);
+            loadRestaurantContent('$restaurant_name');
+          </script>";
+} else {
+    echo "
+    <script>
+    alert('Please select a restaurant and try again.')
+    window.location.href = 'Home';
+</script>
+    ";
+}
 ?>
 
 
@@ -72,8 +90,8 @@ $_GET['restaurant_id'] = 2;
 
                     <!-- Website Logo -->
                     <div class="logo-header mostion">
-                        <a href="restaurant.php" class="anim-logo"><img src="assets/images/logo.png" alt="/"></a>
-                        <a href="restaurant.php" class="anim-logo-white"><img src="assets/images/logo2.png" alt="/"></a>
+                        <a href="Home" class="anim-logo"><img src="assets/images/logo.png" alt="/"></a>
+                        <a href="Home" class="anim-logo-white"><img src="assets/images/logo2.png" alt="/"></a>
                     </div>
 
                     <!-- Nav Toggle Button -->
@@ -88,11 +106,11 @@ $_GET['restaurant_id'] = 2;
                     <!-- Header Nav -->
                     <div class="header-nav navbar-collapse collapse justify-content-end" id="navbarNavDropdown">
                         <div class="logo-header">
-                            <a href="restaurant.php" class="anim-logo"><img src="assets/images/logo.png" alt="/"></a>
+                            <a href="Home" class="anim-logo"><img src="assets/images/logo.png" alt="/"></a>
                         </div>
                         <div class="dz-social-icon">
                             <?php
-                            $fetch_contact_data = $db_handle->runQuery("select * from restaurant_contact where user_id = {$_GET['restaurant_id']}");
+                            $fetch_contact_data = $db_handle->runQuery("select * from restaurant_contact where user_id = '$restaurant_id'");
                             ?>
                             <ul>
                                 <li><a target="_blank" class="fab fa-facebook-f"
@@ -122,7 +140,7 @@ $_GET['restaurant_id'] = 2;
             <div class="container">
                 <div class="dz-bnr-inr-entry">
                     <?php
-                    $fetch_user = $db_handle->runQuery("select * from users where user_id = {$_GET['restaurant_id']}");
+                    $fetch_user = $db_handle->runQuery("select * from users where user_id = '$restaurant_id'");
                     ?>
                     <h1><?php echo $fetch_user[0]['restaurant_name']; ?></h1>
                     <!-- Breadcrumb Row -->
@@ -142,7 +160,7 @@ $_GET['restaurant_id'] = 2;
             <div class="container">
                 <div class="row inner-section-wrapper" id="first-section">
                     <?php
-                    $fetch_category = $db_handle->runQuery("select * from category where user_id = {$_GET['restaurant_id']} and status = 1 limit 2");
+                    $fetch_category = $db_handle->runQuery("select * from category where user_id = '$restaurant_id' and status = 1 limit 2");
                     for ($i = 0; $i < 2; $i++) {
                         ?>
                         <div class="col-xl-4 col-lg-6 col-md-6">
@@ -177,8 +195,8 @@ $_GET['restaurant_id'] = 2;
                 </div>
                 <div class="row">
                     <?php
-                    $fetch_category_new = $db_handle->runQuery("select * from category where user_id = {$_GET['restaurant_id']} and status = 1");
-                    $fetch_category_new_no = $db_handle->numRows("select * from category where user_id = {$_GET['restaurant_id']} and status = 1");
+                    $fetch_category_new = $db_handle->runQuery("select * from category where user_id = '$restaurant_id' and status = 1");
+                    $fetch_category_new_no = $db_handle->numRows("select * from category where user_id = '$restaurant_id' and status = 1");
                     if ($fetch_category_new_no > 2) {
                         for ($i = 2; $i < $fetch_category_new_no; $i++) {
                             ?>
@@ -216,7 +234,7 @@ $_GET['restaurant_id'] = 2;
                 <div class="row">
                     <div class="col-12 text-center">
                         <?php
-                        $fetch_note = $db_handle->runQuery("select note from users where user_id = {$_GET['restaurant_id']}");
+                        $fetch_note = $db_handle->runQuery("select note from users where user_id = '$restaurant_id'");
                         ?>
                         <p><?php echo $fetch_note[0]['note'];?></p>
                     </div>

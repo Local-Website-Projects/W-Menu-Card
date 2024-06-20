@@ -1,0 +1,4 @@
+RewriteEngine on
+
+RewriteRule ^Home index.php [NE,L]
+RewriteRule ^Restaurant restaurant.php [NE,L]
