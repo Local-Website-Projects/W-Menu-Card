@@ -20,6 +20,54 @@
     <link rel="stylesheet" href="assets_home/css/responsive.css">
     <!-- color -->
     <link rel="stylesheet" href="assets_home/css/color.css">
+    <style>
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            padding-top: 100px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            height: 80%;
+            max-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        #reader {
+            width: 100%;
+        }
+    </style>
 
 </head>
 <body>
@@ -42,7 +90,7 @@
             </div>
             <div class="login">
                 <a href="#">Search</a>
-                <a href="#" class="btn"><span>Search with QR</span></a>
+                <a class="btn" onclick="openModal()"><span>Search with QR</span></a>
             </div>
         </div>
     </div>
@@ -52,6 +100,13 @@
 <section id="home" class="hero-section subscribe-with">
     <div class="container">
         <div class="row">
+            <!-- Modal -->
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <div id="reader"></div>
+                </div>
+            </div>
             <div class="col-lg-12">
                 <div class="hero-text">
                     <h1>Easy Ways to Promote Your Services</h1>
@@ -59,11 +114,12 @@
                 <div class="subscribe-text mt-5">
                     <p>Subscribe email</p>
                     <form class="get-subscribee" id="subscribe-form" method="post" action="Restaurant">
-                        <input type="text" id="email-input" name="restaurant_name" placeholder="Enter Restaurant Name" required="" list="suggestions" autocomplete="off">
+                        <input type="text" id="email-input" name="restaurant_name" placeholder="Enter Restaurant Name"
+                               required="" list="suggestions" autocomplete="off">
                         <datalist id="suggestions">
                             <!-- Options will be dynamically populated here -->
                         </datalist>
-                        <button type="submit" name="search_restaurant" class="btn">Find Now</button>
+                        <button type="submit" name="search_restaurant" class="btn" style="z-index: 0;">Find Now</button>
                     </form>
                 </div>
 
@@ -130,6 +186,21 @@
                 <h5>Recommended by world-class companies</h5>
             </div>
             <div class="clients-slider owl-carousel">
+                <div class="item">
+                    <img alt="clients" src="assets_home/img/clients-1.png">
+                </div>
+                <div class="item">
+                    <img alt="clients" src="assets_home/img/clients-2.png">
+                </div>
+                <div class="item">
+                    <img alt="clients" src="assets_home/img/clients-3.png">
+                </div>
+                <div class="item">
+                    <img alt="clients" src="assets_home/img/clients-4.png">
+                </div>
+                <div class="item">
+                    <img alt="clients" src="assets_home/img/clients-5.png">
+                </div>
                 <div class="item">
                     <img alt="clients" src="assets_home/img/clients-1.png">
                 </div>
@@ -256,6 +327,94 @@
     <span id="progress-value"><i class="fa-solid fa-arrow-up"></i></span>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/html5-qrcode/minified/html5-qrcode.min.js"></script>
+<script>
+    let html5QrCode;
+
+    function openModal() {
+        const modal = document.getElementById('myModal');
+        modal.style.display = "block";
+        startScan();
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('myModal');
+        modal.style.display = "none";
+        stopScan();
+    }
+
+    function startScan() {
+        html5QrCode = new Html5Qrcode("reader");
+
+        Html5Qrcode.getCameras().then(cameras => {
+            if (cameras && cameras.length) {
+                // Try to find the back camera
+                let backCamera = cameras.find(camera => camera.label.toLowerCase().includes('back') || camera.label.toLowerCase().includes('rear'));
+                const cameraId = backCamera ? backCamera.id : cameras[0].id;
+
+                html5QrCode.start(
+                    cameraId,
+                    {
+                        fps: 10,
+                        qrbox: {width: 250, height: 250}
+                    },
+                    qrCodeMessage => {
+                        if (isValidUrl(qrCodeMessage)) {
+                            window.location.href = qrCodeMessage;
+                        } else {
+                            alert(`QR Code detected: ${qrCodeMessage}`);
+                        }
+                        stopScan();
+                    },
+                    errorMessage => {
+                        console.warn("QR Code scan failed.", errorMessage);
+                    })
+                    .catch(err => {
+                        console.error("Failed to start QR Code scanning.", err);
+                    });
+            } else {
+                alert("No cameras found. Please ensure your device has a camera and that it is working properly.");
+            }
+        }).catch(err => {
+            console.error("Error in getting cameras.", err);
+            alert("Error in accessing camera: " + (err.message || err));
+        });
+    }
+
+    function stopScan() {
+        if (html5QrCode) {
+            html5QrCode.stop().then(ignore => {
+                // QR Code scanning is stopped.
+            }).catch(err => {
+                console.error("Failed to stop QR Code scanning.", err);
+            });
+        }
+    }
+
+    // Function to validate URL
+    function isValidUrl(string) {
+        try {
+            new URL(string);
+            return true;
+        } catch (_) {
+            return false;
+        }
+    }
+
+    // Close the modal when the user clicks on <span> (x)
+    document.getElementsByClassName('close')[0].onclick = function () {
+        closeModal();
+    }
+
+    // Close the modal when the user clicks anywhere outside of the modal
+    window.onclick = function (event) {
+        const modal = document.getElementById('myModal');
+        if (event.target == modal) {
+            closeModal();
+        }
+    }
+</script>
+
 <!-- jQuery -->
 <script src="assets_home/js/jquery-3.6.0.min.js"></script>
 <!-- Bootstrap Js -->
@@ -270,42 +429,42 @@
 
 
 <script>
-        document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const input = document.getElementById('email-input');
         const datalist = document.getElementById('suggestions');
 
-        input.addEventListener('input', function() {
-        const value = input.value.trim().toLowerCase();
+        input.addEventListener('input', function () {
+            const value = input.value.trim().toLowerCase();
 
-        if (value.length > 0) {
-        fetchSuggestions(value);
-    } else {
-        // Clear the datalist if input is empty
-        datalist.innerHTML = '';
-    }
-    });
+            if (value.length > 0) {
+                fetchSuggestions(value);
+            } else {
+                // Clear the datalist if input is empty
+                datalist.innerHTML = '';
+            }
+        });
 
         async function fetchSuggestions(query) {
-        try {
-        const response = await fetch(`fetch-suggestions.php?query=${encodeURIComponent(query)}`);
+            try {
+                const response = await fetch(`fetch-suggestions.php?query=${encodeURIComponent(query)}`);
 
-        if (response.ok) {
-        const suggestions = await response.json();
-        // Clear existing options
-        datalist.innerHTML = '';
-        // Add new options to the datalist
-        suggestions.forEach(suggestion => {
-        const option = document.createElement('option');
-        option.value = suggestion;
-        datalist.appendChild(option);
-    });
-    } else {
-        console.error('Failed to fetch suggestions:', response.statusText);
-    }
-    } catch (error) {
-        console.error('Error fetching suggestions:', error);
-    }
-    }
+                if (response.ok) {
+                    const suggestions = await response.json();
+                    // Clear existing options
+                    datalist.innerHTML = '';
+                    // Add new options to the datalist
+                    suggestions.forEach(suggestion => {
+                        const option = document.createElement('option');
+                        option.value = suggestion;
+                        datalist.appendChild(option);
+                    });
+                } else {
+                    console.error('Failed to fetch suggestions:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Error fetching suggestions:', error);
+            }
+        }
     });
 </script>
 </body>

@@ -35,8 +35,8 @@ jQuery(document).ready(function($){
             loop:true,
             dot:false,
             nav:false,
-            // autoplay:true,
-            // autoplayTimeout:3000,
+            autoplay:true,
+            autoplayTimeout:3000,
             responsive:{
                 0:{
                     items:1
