@@ -63,7 +63,7 @@ a{
 }
 h1 {
     font-family: 'Instrument Sans';
-    font-size: 90px;
+    font-size: 70px;
     line-height: 100px;
     font-weight: bold;
 }
@@ -350,7 +350,7 @@ img.shaps-line {
 }
 .heading h2 {
     font-family: 'Instrument Sans';
-    font-size: 70px;
+    font-size: 60px;
     line-height: 80px;
     font-weight: 700;
     text-transform: capitalize;
@@ -1328,7 +1328,7 @@ ul.social-icon i:hover:after {
     font-weight: bold;
     color: #000;
     padding-right: 30px;
-    font-size: 22px;
+    font-size: 20px;
     text-transform: capitalize;
 }
 .subscribe-text {

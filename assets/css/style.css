@@ -12689,28 +12689,11 @@ section {
   position: relative;
   padding-top: 5px;
   display: inline-block; }
-  .anim-logo:after,
-  .anim-logo-white:after {
-    content: "";
-    animation-duration: 1.8s;
-    animation-fill-mode: both;
-    animation-iteration-count: infinite;
-    animation-name: swigo-logo;
-    background-image: url(../images/pan1.png);
-    height: 12px;
-    width: 38px;
-    position: absolute;
-    top: 8px;
-    left: 3px;
-    background-repeat: no-repeat; }
     @media only screen and (max-width: 767px) {
       .anim-logo:after,
       .anim-logo-white:after {
         top: 10px;
         background-size: 90%; } }
-
-.anim-logo-white:after {
-  background-image: url(../images/pan2.png); }
 
 .header-nav .anim-logo:after,
 .header-nav .anim-logo-white:after,

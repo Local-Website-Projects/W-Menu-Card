@@ -8,13 +8,23 @@ $updated_at = date("Y-m-d H:i:s");
 if (isset($_POST['search_restaurant'])) {
     $restaurant_name = $db_handle->checkValue($_POST['restaurant_name']);
     $fetch_restaurant = $db_handle->runQuery("SELECT * FROM users WHERE restaurant_name = '$restaurant_name'");
-    $restaurant_id = $fetch_restaurant[0]['user_id'];
-    // Output the JavaScript code to update the URL and load content dynamically
-    echo "<script>
+    $fetch_restaurant_no = $db_handle->numRows("SELECT * FROM users WHERE restaurant_name = '$restaurant_name'");
+    if($fetch_restaurant_no > 0){
+        $restaurant_id = $fetch_restaurant[0]['user_id'];
+        // Output the JavaScript code to update the URL and load content dynamically
+        echo "<script>
             var newUrl = window.location.protocol + '//' + window.location.host + window.location.pathname + '?' + encodeURIComponent('$restaurant_name');
             window.history.replaceState({path: newUrl}, '', newUrl);
             loadRestaurantContent('$restaurant_name');
           </script>";
+    } else {
+        echo "
+    <script>
+    alert('No Restaurant is found with that name near you. Please check the name and try again.');
+    window.location.href = 'Home';
+</script>
+    ";
+    }
 } else {
     echo "
     <script>

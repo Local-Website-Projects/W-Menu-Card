@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anex - Index</title>
+    <title>Menusz - Find Restaurant Menu Online</title>
     <link rel="icon" href="assets_home/img/logo-anex-2.png">
     <!-- CSS only -->
     <link rel="stylesheet" type="text/css" href="assets_home/css/bootstrap.min.css">
@@ -85,7 +85,7 @@
         <div class="top-bar">
             <div class="logo">
                 <a href="#">
-                    <img alt="logo" style="max-width: 180px" src="assets_home/img/logo.png">
+                    <img alt="logo" style="max-width: 180px" src="assets_home/img/logo1.png">
                 </a>
             </div>
             <div class="login">
@@ -109,17 +109,17 @@
             </div>
             <div class="col-lg-12">
                 <div class="hero-text">
-                    <h1>Easy Ways to Promote Your Services</h1>
+                    <h1>Easy Way to Find Restaurant's Menu: Near You</h1>
                 </div>
                 <div class="subscribe-text mt-5">
-                    <p>Subscribe email</p>
+                    <p>Search Restaurant</p>
                     <form class="get-subscribee" id="subscribe-form" method="post" action="Restaurant">
                         <input type="text" id="email-input" name="restaurant_name" placeholder="Enter Restaurant Name"
                                required="" list="suggestions" autocomplete="off">
                         <datalist id="suggestions">
                             <!-- Options will be dynamically populated here -->
                         </datalist>
-                        <button type="submit" name="search_restaurant" class="btn" style="z-index: 0;">Find Now</button>
+                        <button type="submit" name="search_restaurant" class="btn" style="z-index: 0;">Find Menu</button>
                     </form>
                 </div>
 
@@ -135,7 +135,7 @@
          style="background-image: url(assets_home/img/background_1.png);">
     <div class="container">
         <div class="heading">
-            <h2>Unlimited design at the <span>next level</span></h2>
+            <h2>Make Your Menu Online and Easy to <span>Find with Us</span></h2>
         </div>
         <div class="row background-color">
             <div class="offset-lg-1 col-lg-10">
@@ -144,8 +144,8 @@
                     <div class="col-lg-4">
                         <div class="count-style">
                             <div class="count-text">
-                                <h3 data-max="40"><sub>+</sub></h3>
-                                <span>Professional Team Members</span>
+                                <h3 data-max="50"><sub>+</sub></h3>
+                                <span>Total Restaurants</span>
                             </div>
                             <img src="assets_home/img/certification-1.png" alt="certification-1">
                         </div>
@@ -153,8 +153,8 @@
                     <div class="col-lg-4">
                         <div class="count-style">
                             <div class="count-text">
-                                <h3 data-max="14"><sub>k</sub></h3>
-                                <span>Completed Projects</span>
+                                <h3 data-max="1"><sub>k+</sub></h3>
+                                <span>Daily Visitors</span>
                             </div>
                             <img src="assets_home/img/project-management-1.png" alt="certification-1">
                         </div>
@@ -162,8 +162,8 @@
                     <div class="col-lg-4">
                         <div class="count-style">
                             <div class="count-text">
-                                <h3 data-max="10"><sub>k</sub></h3>
-                                <span>Happy Satisfied Customers</span>
+                                <h3 data-max="10"></h3>
+                                <span>Total Country</span>
                             </div>
                             <img src="assets_home/img/bad-review-1.png" alt="certification-1">
                         </div>
@@ -183,7 +183,7 @@
     <div class="container">
         <div class="container gap no-bottom">
             <div class="recommended">
-                <h5>Recommended by world-class companies</h5>
+                <h5>Restaurants registered with us.</h5>
             </div>
             <div class="clients-slider owl-carousel">
                 <div class="item">
@@ -216,6 +216,12 @@
                 <div class="item">
                     <img alt="clients" src="assets_home/img/clients-5.png">
                 </div>
+                <div class="item">
+                    <img alt="clients" src="assets_home/img/clients-6.png">
+                </div>
+                <div class="item">
+                    <img alt="clients" src="assets_home/img/clients-7.png">
+                </div>
             </div>
         </div>
     </div>
@@ -228,9 +234,9 @@
 <footer class="footer" style="background-image: url(assets_home/img/footer.jpg);">
     <div class="container">
         <div class="heading">
-            <h2>Start Your Business and <span>Achieve Goals</span></h2>
-            <p>Great and strong landing page made to enhance the marketer's workflow.</p>
-            <a href="#" class="btn">Get a Quote</a>
+            <h2>Want to register <span>Your Restaurant</span> with us?</h2>
+            <p>Fell Free to leave us a message</p>
+            <a href="https://wa.me/8801729277765" target="_blank" class="btn">Contact Us</a>
         </div>
         <div class="row">
             <div class="col-lg-4 col-md-6">
@@ -255,8 +261,8 @@
                     </i>
                     <div>
                         <h3>phone:</h3>
-                        <p>Home:<a href="callto:+1238717662">+1 23871 7662</a></p>
-                        <p>Office:<a href="callto:+1458794512">+1 458794512</a></p>
+                        <p>Business:<a href="callto:+8801729277765">+880 1729 277 765</a></p>
+                        <p>Support:<a href="callto:+8801729277768">+880 1729 277 768</a></p>
                     </div>
                 </div>
             </div>
@@ -285,7 +291,7 @@
                         </i></div>
                     <div>
                         <h3>Address</h3>
-                        <p>New town 245 Go Up Street Ltd<br> 71 United State</p>
+                        <p>16 KDA Avenue, Moylapota<br> Khulna 9100</p>
                     </div>
                 </div>
             </div>
@@ -302,21 +308,23 @@
                         </i></div>
                     <div>
                         <h3>Email:</h3>
-                        <a href="mailto:info@domainname.com">+info@domainname.com</a>
-                        <a href="mailto:business@domain.com">business@domain.com</a>
+                        <a href="mailto:info@domainname.com">business@menusz.com</a>
+                        <a href="mailto:business@domain.com">support@menusz.com</a>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="copyright">
-            <a href="#"><img src="assets_home/img/logo-w.png" alt="logo"></a>
-            <p>© 2023 Anex by Winsfolio. All Rights Reserved.</p>
-            <ul class="social-icon">
-                <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fa-brands fa-youtube"></i></a></li>
-                <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-            </ul>
+        <div class="row copyright">
+            <div class="col-12 text-center">
+                <!--<a href="#"><img src="assets_home/img/logo-w.png" alt="logo" style="max-width: 180px"></a>-->
+                <p>© 2024 Menusz. All Rights Reserved | Developed with <a href="#" target="_blank" style="color: #108A00;">FrogBID</a></p>
+                <!--<ul class="social-icon">
+                    <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
+                    <li><a href="#"><i class="fa-brands fa-youtube"></i></a></li>
+                    <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                </ul>-->
+            </div>
         </div>
     </div>
 </footer>
