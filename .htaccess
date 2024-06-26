@@ -2,3 +2,4 @@ RewriteEngine on
 
 RewriteRule ^Home index.php [NE,L]
 RewriteRule ^Restaurant restaurant.php [NE,L]
+RewriteRule ^View-Menu view_menu.php [NE,L]

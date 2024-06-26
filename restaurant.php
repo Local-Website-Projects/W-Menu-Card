@@ -7,8 +7,8 @@ $updated_at = date("Y-m-d H:i:s");
 
 if (isset($_POST['search_restaurant'])) {
     $restaurant_name = $db_handle->checkValue($_POST['restaurant_name']);
-    $fetch_restaurant = $db_handle->runQuery("SELECT * FROM users WHERE restaurant_name = '$restaurant_name'");
-    $fetch_restaurant_no = $db_handle->numRows("SELECT * FROM users WHERE restaurant_name = '$restaurant_name'");
+    $fetch_restaurant = $db_handle->runQuery("SELECT * FROM users WHERE restaurant_name = '$restaurant_name' and type = 1 and availability = 1 and status = 1");
+    $fetch_restaurant_no = $db_handle->numRows("SELECT * FROM users WHERE restaurant_name = '$restaurant_name' and type = 1 and availability = 1 and status = 1");
     if($fetch_restaurant_no > 0){
         $restaurant_id = $fetch_restaurant[0]['user_id'];
         // Output the JavaScript code to update the URL and load content dynamically
@@ -20,7 +20,7 @@ if (isset($_POST['search_restaurant'])) {
     } else {
         echo "
     <script>
-    alert('No Restaurant is found with that name near you. Please check the name and try again.');
+    alert('No Restaurant is currently found with that name near you. Please check the name and try again.');
     window.location.href = 'Home';
 </script>
     ";
@@ -40,9 +40,17 @@ if (isset($_POST['search_restaurant'])) {
 <html lang="en">
 
 <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-C1Z97B3DEK"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-C1Z97B3DEK');
+    </script>
 
     <!-- Title -->
-    <title>Restaurant Menu Card</title>
+    <title>Menusz - Restaurant Menu Card</title>
 
     <!-- Meta -->
     <meta charset="utf-8">

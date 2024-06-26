@@ -2,9 +2,20 @@
 <html lang="zxx">
 
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-C1Z97B3DEK"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-C1Z97B3DEK');
+    </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menusz - Find Restaurant Menu Online</title>
+    <meta name="description" content="Welcome to Menusz – your ultimate destination for exploring and showcasing restaurant menus online!">
+    <meta name="keywords" content="Menusz, Restaurant menus online, View restaurant menu, Restaurant menus khulna, Online menu with prices, Restaurant menu photos, Local restaurant menus, QR code menu search">
     <link rel="icon" href="assets_home/img/logo-anex-2.png">
     <!-- CSS only -->
     <link rel="stylesheet" type="text/css" href="assets_home/css/bootstrap.min.css">
