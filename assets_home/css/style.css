@@ -1379,6 +1379,7 @@ form#subscribe-form {
 .get-subscribee .btn {
     padding: 20px 48px;
     width: 247px;
+    margin: 20px;
 }
 /* 23. video-fram */
 .video-fram iframe {

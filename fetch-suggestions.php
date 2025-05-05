@@ -10,11 +10,15 @@ if (isset($_GET['query'])) {
     $query = $_GET['query'];
     $datas = $db_handle->runQuery("select * from users where restaurant_name like '%$query%' and availability = 1 and status = 1 and type = 1");
 
-
-    $suggestions = array();
-    foreach ($datas as $data) {
-        $suggestions[] = $data['restaurant_name'];
+    if($datas){
+            $suggestions = array();
+            foreach ($datas as $data) {
+                $id = $data['user_id'];
+                $count_item = $db_handle->numRows("SELECT * FROM `items` WHERE `user_id` = '$id'");
+                if($count_item > 0){
+                    $suggestions[] = $data['restaurant_name'];
+                }
+            }
+            echo json_encode($suggestions);
     }
-
-    echo json_encode($suggestions);
 }

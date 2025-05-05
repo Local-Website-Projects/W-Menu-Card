@@ -32,6 +32,39 @@
     <!-- color -->
     <link rel="stylesheet" href="assets_home/css/color.css">
     <style>
+        .autocomplete-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .suggestions-list {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: white;
+            border-top: none;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 20px;
+        }
+
+        .suggestions-list li {
+            padding: 10px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            text-align: left; /* Align text to the left */
+        }
+
+        .suggestions-list li:hover {
+            background-color: #f0f0f0;
+        }
+
         /* Modal styles */
         .modal {
             display: none;
@@ -79,7 +112,6 @@
             width: 100%;
         }
     </style>
-
 </head>
 <body>
 
@@ -125,11 +157,10 @@
                 <div class="subscribe-text mt-5">
                     <p>Search Restaurant</p>
                     <form class="get-subscribee" id="subscribe-form" method="post" action="Restaurant">
-                        <input type="text" id="email-input" name="restaurant_name" placeholder="Enter Restaurant Name"
-                               required="" list="suggestions" autocomplete="off">
-                        <datalist id="suggestions">
-                            <!-- Options will be dynamically populated here -->
-                        </datalist>
+                        <div class="autocomplete-container">
+                            <input type="text" id="email-input" name="restaurant_name" placeholder="Enter Restaurant Name" autocomplete="off" required>
+                            <ul id="suggestions" class="suggestions-list"></ul>
+                        </div>
                         <button type="submit" name="search_restaurant" class="btn" style="z-index: 0;">Find Menu</button>
                     </form>
                 </div>
@@ -328,7 +359,7 @@
         <div class="row copyright">
             <div class="col-12 text-center">
                 <!--<a href="#"><img src="assets_home/img/logo-w.png" alt="logo" style="max-width: 180px"></a>-->
-                <p>© 2024 Menusz. All Rights Reserved | Developed with <a href="#" target="_blank" style="color: #108A00;">FrogBID</a></p>
+                <p>© <?php echo date("Y"); ?> Menusz. All Rights Reserved | Developed with <a href="https://frogbid.com/" target="_blank" style="color: #108A00;">FrogBID</a></p>
                 <!--<ul class="social-icon">
                     <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
                     <li><a href="#"><i class="fa-brands fa-youtube"></i></a></li>
@@ -450,7 +481,7 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const input = document.getElementById('email-input');
-        const datalist = document.getElementById('suggestions');
+        const suggestionsList = document.getElementById('suggestions');
 
         input.addEventListener('input', function () {
             const value = input.value.trim().toLowerCase();
@@ -458,8 +489,16 @@
             if (value.length > 0) {
                 fetchSuggestions(value);
             } else {
-                // Clear the datalist if input is empty
-                datalist.innerHTML = '';
+                suggestionsList.innerHTML = '';
+                suggestionsList.style.display = 'none';
+            }
+        });
+
+        suggestionsList.addEventListener('click', function (e) {
+            if (e.target.tagName === 'LI') {
+                input.value = e.target.textContent;
+                suggestionsList.innerHTML = '';
+                suggestionsList.style.display = 'none';
             }
         });
 
@@ -469,14 +508,18 @@
 
                 if (response.ok) {
                     const suggestions = await response.json();
-                    // Clear existing options
-                    datalist.innerHTML = '';
-                    // Add new options to the datalist
-                    suggestions.forEach(suggestion => {
-                        const option = document.createElement('option');
-                        option.value = suggestion;
-                        datalist.appendChild(option);
-                    });
+                    suggestionsList.innerHTML = '';
+
+                    if (suggestions.length > 0) {
+                        suggestions.forEach(suggestion => {
+                            const li = document.createElement('li');
+                            li.textContent = suggestion;
+                            suggestionsList.appendChild(li);
+                        });
+                        suggestionsList.style.display = 'block';
+                    } else {
+                        suggestionsList.style.display = 'none';
+                    }
                 } else {
                     console.error('Failed to fetch suggestions:', response.statusText);
                 }
@@ -484,6 +527,14 @@
                 console.error('Error fetching suggestions:', error);
             }
         }
+
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('.autocomplete-container')) {
+                suggestionsList.innerHTML = '';
+                suggestionsList.style.display = 'none';
+            }
+        });
     });
+
 </script>
 </body>
