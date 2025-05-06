@@ -5,18 +5,14 @@ $db_handle = new DBController();
 date_default_timezone_set("Asia/Dhaka");
 $updated_at = date("Y-m-d H:i:s");
 
-if (isset($_GET['user'])) {
-    $fetch_restaurant = $db_handle->runQuery("SELECT * FROM users WHERE user_id = {$_GET['user']} and type = 1 and availability = 1 and status = 1");
-    $fetch_restaurant_no = $db_handle->numRows("SELECT * FROM users WHERE user_id = {$_GET['user']} and type = 1 and availability = 1 and status = 1");
+if (isset($_GET['restaurant'])) {
+    $raw_name = $_GET['restaurant'];
+    $restaurant_name = str_replace('-', ' ', $raw_name);
+    $fetch_restaurant = $db_handle->runQuery("SELECT * FROM users WHERE restaurant_name = '$restaurant_name' and type = 1 and availability = 1 and status = 1");
+    $fetch_restaurant_no = $db_handle->numRows("SELECT * FROM users WHERE restaurant_name = '$restaurant_name' and type = 1 and availability = 1 and status = 1");
     if($fetch_restaurant_no > 0){
         $restaurant_name =  $fetch_restaurant[0]['restaurant_name'];
         $restaurant_id = $fetch_restaurant[0]['user_id'];
-        // Output the JavaScript code to update the URL and load content dynamically
-        echo "<script>
-            var newUrl = window.location.protocol + '//' + window.location.host + window.location.pathname + '?' + encodeURIComponent('$restaurant_name');
-            window.history.replaceState({path: newUrl}, '', newUrl);
-            loadRestaurantContent('$restaurant_name');
-          </script>";
     } else {
         echo "
     <script>

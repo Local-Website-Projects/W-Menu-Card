@@ -1,3 +1,9 @@
+<?php
+session_start();
+require_once('config/dbConfig.php');
+$db_handle = new DBController();
+?>
+
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -157,11 +163,30 @@
                 <div class="subscribe-text mt-5">
                     <p>Search Restaurant</p>
                     <form class="get-subscribee" id="subscribe-form" method="post" action="Restaurant">
-                        <div class="autocomplete-container">
-                            <input type="text" id="email-input" name="restaurant_name" placeholder="Enter Restaurant Name" autocomplete="off" required>
-                            <ul id="suggestions" class="suggestions-list"></ul>
+                        <div class="autocomplete-container" style="position: relative; display: flex; border: 1px solid #ccc; border-radius: 4px; overflow: hidden; max-width: 400px;">
+                            <!-- Dropdown -->
+                            <select id="category-select" required style="border: none; padding: 10px; width: 40%; outline: none;">
+                                <option value="" disabled selected>Location</option>
+                                <?php
+                                $fetch_location = $db_handle->runQuery("select * from locations");
+                                $fetch_location_no = $db_handle->numRows("select * from locations");
+                                for($i=0; $i<$fetch_location_no; $i++){
+                                    ?>
+                                    <option value="<?php echo $fetch_location[$i]['location_id'];?>"><?php echo $fetch_location[$i]['location_name'];?></option>
+                                    <?php
+                                }
+                                ?>
+                            </select>
+
+                            <!-- Input field -->
+                            <input type="text" id="email-input" name="restaurant_name"
+                                   placeholder="Enter Restaurant Name" autocomplete="off" required disabled
+                                   style="border: none; padding: 10px; width: 60%; outline: none;">
                         </div>
-                        <button type="submit" name="search_restaurant" class="btn" style="z-index: 0;">Find Menu</button>
+
+                        <ul id="suggestions" class="suggestions-list"></ul>
+
+                        <button type="submit" name="search_restaurant" class="btn" style="margin-top: 10px; z-index: 0;">Find Menu</button>
                     </form>
                 </div>
 
@@ -378,6 +403,14 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/html5-qrcode/minified/html5-qrcode.min.js"></script>
+
+<script>
+    // Enable input field after dropdown is selected
+    document.getElementById('category-select').addEventListener('change', function () {
+        document.getElementById('email-input').disabled = false;
+        document.getElementById('email-input').focus();
+    });
+</script>
 <script>
     let html5QrCode;
 
@@ -503,8 +536,13 @@
         });
 
         async function fetchSuggestions(query) {
+            const locationSelect = document.getElementById('category-select');
+            const locationId = locationSelect.value;
+
+            if (!locationId) return; // prevent fetch if location is not selected
+
             try {
-                const response = await fetch(`fetch-suggestions.php?query=${encodeURIComponent(query)}`);
+                const response = await fetch(`fetch-suggestions.php?query=${encodeURIComponent(query)}&location_id=${encodeURIComponent(locationId)}`);
 
                 if (response.ok) {
                     const suggestions = await response.json();

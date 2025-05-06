@@ -3,22 +3,23 @@ session_start();
 require_once('config/dbConfig.php');
 $db_handle = new DBController();
 date_default_timezone_set("Asia/Dhaka");
-$updated_at = date("Y-m-d H:i:s");
 
-
-if (isset($_GET['query'])) {
+if (isset($_GET['query']) && isset($_GET['location_id'])) {
     $query = $_GET['query'];
-    $datas = $db_handle->runQuery("select * from users where restaurant_name like '%$query%' and availability = 1 and status = 1 and type = 1");
+    $location_id = $_GET['location_id'];
 
-    if($datas){
-            $suggestions = array();
-            foreach ($datas as $data) {
-                $id = $data['user_id'];
-                $count_item = $db_handle->numRows("SELECT * FROM `items` WHERE `user_id` = '$id'");
-                if($count_item > 0){
-                    $suggestions[] = $data['restaurant_name'];
-                }
+    $datas = $db_handle->runQuery("SELECT * FROM users WHERE restaurant_name LIKE '%$query%' AND availability = 1 AND status = 1 AND type = 1 AND location = '$location_id'");
+
+    if ($datas) {
+        $suggestions = array();
+        foreach ($datas as $data) {
+            $id = $data['user_id'];
+            $count_item = $db_handle->numRows("SELECT * FROM `items` WHERE `user_id` = '$id'");
+            if ($count_item > 0) {
+                $suggestions[] = $data['restaurant_name'];
             }
-            echo json_encode($suggestions);
+        }
+        echo json_encode($suggestions);
     }
 }
+?>

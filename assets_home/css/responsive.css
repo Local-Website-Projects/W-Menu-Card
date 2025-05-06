@@ -461,7 +461,6 @@
   }
   .get-subscribee input {
     margin: 0;
-    margin-bottom: 10px;
   }
   h1 {
     font-size: 48px;
@@ -536,6 +535,7 @@
   }
   .get-subscribee .btn,.get-subscribee input {
     width: 100%;
+    font-size: 14px;
   }
 }
 @media(max-width: 500px){
