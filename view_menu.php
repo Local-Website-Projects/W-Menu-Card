@@ -157,6 +157,8 @@ if (isset($_GET['restaurant'])) {
                     $fetch_user = $db_handle->runQuery("select * from users where user_id = '$restaurant_id'");
                     ?>
                     <h1><?php echo $fetch_user[0]['restaurant_name']; ?></h1>
+                    <h4 style="color: white;">Address: <?php echo $fetch_contact_data[0]['address'];?></h4>
+                    <h4 style="color: white;">Contact: <?php echo $fetch_contact_data[0]['contact_number_one'];?></h4>
                     <!-- Breadcrumb Row -->
                     <nav aria-label="breadcrumb" class="breadcrumb-row">
                         <ul class="breadcrumb">

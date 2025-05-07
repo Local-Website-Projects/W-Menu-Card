@@ -9,7 +9,7 @@ if (!file_exists($dir)) {
     mkdir($dir, 0755, true);
 }
 
-$code = 'Chandrima Roy';
+$code = 'Restaurant';
 $filePath = $dir . '/' . $code . '.png';
 $link = 'https://frogbid.com/employee/chandrima_roy.html';
 QRcode::png($link, $filePath, QR_ECLEVEL_L, 10);
